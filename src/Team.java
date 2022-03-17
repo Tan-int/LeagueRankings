@@ -1,8 +1,8 @@
 public abstract class Team implements Comparable<Team>{
-    private String name;
-    private Record record;
-    private String conference;
-    private int rank;
+    private final String name;
+    private final Record record;
+    private final String conference;
+    private final int rank;
 
 
     //Constructor
@@ -31,7 +31,7 @@ public abstract class Team implements Comparable<Team>{
 
     @Override
     public String toString() {
-        return name + "\t" + record;
+        return name + record;
     }
 
     //GETTERS
@@ -45,7 +45,7 @@ public abstract class Team implements Comparable<Team>{
     }
 
     //INNER CLASS RECORD
-    private class Record {
+    private static class Record {
         int wins;
         int losses;
         int ties;
@@ -59,7 +59,7 @@ public abstract class Team implements Comparable<Team>{
 
         @Override
         public String toString() {
-            return wins + "\t" + losses + "\t" + ties;
+            return String.format("%10d", wins) + " " + losses + " " + ties;
         }
 
     }

@@ -1,39 +1,35 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Standings<T extends Team> {
     private String name;
-    private ArrayList<Team> teams = new ArrayList<>();
+    private ArrayList<T> teams = new ArrayList<>();
 
     public Standings(String name) {
         this.name = name;
     }
 
     public boolean addTeam(T team) {
-        for(Team t: teams) {
-            if(t.getName().equals(team.getName())) {
-                System.out.println(team.getName() + " is already on the list");
-                return false;
-            } else if (!t.getConference().equals(team.getConference())) {
-                System.out.println("Teams must be in the same conference");
-                return false;
-            }
+        if(teams.contains(team)) {
+            System.out.println(team.getName() + " is already in the standings");
+            return false;
         }
 
         teams.add(team);
-        System.out.println(team.getName() + " added to " + team.getConference());
         return true;
-
     }
 
     public void rankings() {
-        for(Team t: teams) {
-            System.out.println(t.toString());
+        Collections.sort(teams);
+        System.out.println("-------- " + name + " --------");
+        for(T t: teams) {
+            System.out.println((teams.indexOf(t) + 1) + ". " + t.toString());
         }
     }
 
     //GETTERS
 
-    public ArrayList<Team> getTeams() {
+    public ArrayList<T> getTeams() {
         return teams;
     }
 }
